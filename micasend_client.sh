@@ -1,8 +1,8 @@
 #!/usr/bin/bash
 
 #configuration
-host="127.0.0.1/micasend"; 
-user="votrenomd_utilisateur";
+host="127.0.0.1/micasend/webserver"; 
+user="votrenomdsateur";
 
 function SendMsg() {
 	#on remplace les espaces par des §
@@ -13,13 +13,13 @@ function SendMsg() {
 	msg=${msg//\\/§};
 	sender=${sender//\\/§};
 
-	curl -s $host/web/msg.php?message=$msg\&sender=$sender;
+	curl -s $host/msg.php?message=$msg\&sender=$sender;
 }
 
 function ReadMsg() {
-	content=($(echo $(curl -s $host/web/msg.php?getmsg=content)));
-	sender=($(echo $(curl -s $host/web/msg.php?getmsg=sender)));
-	date_time=($(echo $(curl -s $host/web/msg.php?getmsg=date_time)));
+	content=($(echo $(curl -s $host/msg.php?getmsg=content)));
+	sender=($(echo $(curl -s $host/msg.php?getmsg=sender)));
+	date_time=($(echo $(curl -s $host/msg.php?getmsg=date_time)));
 
 	clear
 	for ((i=0; i<$((${#content[*]})); i++ ))
