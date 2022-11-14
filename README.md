@@ -4,7 +4,7 @@ il suffit juste de télécharger le fichier "micasend_client.sh", de le rendre e
 
 ## Configuration
 dans le fichier :
-```sh
+```bash
 host="le serveur distant communiqué par votre administrateur"
 user="votre nom d'utilisateur"
 ```
