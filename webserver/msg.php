@@ -37,6 +37,15 @@ if(isset($_GET['getmsg']) AND !empty($_GET['getmsg'])) {
 				echo " ";
 			}
 		}
+	} elseif ($getmsg == "json") {
+		echo "[";
+		for($i=0; $i<count($result); $i++) {
+			echo '{"content":"'.$result[$i]["content"].'", "sender":"'.$result[$i]["sender"].'", "date_time":"'.$result[$i]["date_time"].'"}';
+			if($i < (count($result)-1)) {
+				echo ",";
+			}
+		}
+		echo "]";
 	} else {
 		for($i=0; $i<count($result); $i++) {
 			echo '{"'.$result[$i]["content"].'";"'.$result[$i]["sender"].'";"'.$result[$i]["date_time"].'"}<br>';
