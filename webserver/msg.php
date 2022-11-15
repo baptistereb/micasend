@@ -31,7 +31,14 @@ $result = $req->fetchAll(PDO::FETCH_ASSOC);
 
 if(isset($_GET['getmsg']) AND !empty($_GET['getmsg'])) {
 	$getmsg = htmlspecialchars($_GET['getmsg']);
-	if($getmsg == "content") {
+	if($getmsg == "id") {
+		for($i=0; $i<count($result); $i++) {
+			echo $result[$i]["id"];
+			if($i < (count($result)-1)) {
+				echo " ";
+			}
+		}
+	} elseif ($getmsg == "content") {
 		for($i=0; $i<count($result); $i++) {
 			echo $result[$i]["content"];
 			if($i < (count($result)-1)) {
@@ -52,10 +59,17 @@ if(isset($_GET['getmsg']) AND !empty($_GET['getmsg'])) {
 				echo " ";
 			}
 		}
+	} elseif ($getmsg == "id_certified_user") {
+		for($i=0; $i<count($result); $i++) {
+			echo $result[$i]["id_certified_user"];
+			if($i < (count($result)-1)) {
+				echo " ";
+			}
+		}
 	} elseif ($getmsg == "json") {
 		echo "[";
 		for($i=0; $i<count($result); $i++) {
-			echo '{"content":"'.$result[$i]["content"].'", "sender":"'.$result[$i]["sender"].'", "date_time":"'.$result[$i]["date_time"].'"}';
+			echo '{"content":"'.$result[$i]["content"].'", "sender":"'.$result[$i]["sender"].'", "date_time":"'.$result[$i]["date_time"].'", "id_certified_user":"'.$result[$i]["id_certified_user"].'"}';
 			if($i < (count($result)-1)) {
 				echo ",";
 			}
@@ -63,7 +77,7 @@ if(isset($_GET['getmsg']) AND !empty($_GET['getmsg'])) {
 		echo "]";
 	} else {
 		for($i=0; $i<count($result); $i++) {
-			echo '{"'.$result[$i]["content"].'";"'.$result[$i]["sender"].'";"'.$result[$i]["date_time"].'"}<br>';
+			echo '{"'.$result[$i]["content"].'";"'.$result[$i]["sender"].'";"'.$result[$i]["date_time"].'";"'.$result[$i]["id_certified_user"].'"}<br>';
 		}
 	}
 }
