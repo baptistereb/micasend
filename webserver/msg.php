@@ -5,9 +5,24 @@ if(isset($_GET['message']) AND !empty($_GET['message']) AND isset($_GET['sender'
 {
 	$msg = htmlspecialchars($_GET['message']);
 	$sender = htmlspecialchars($_GET['sender']);
-	$admin = 0;
-	$reqins = $db->prepare("INSERT INTO msg(content, sender, admin, date_time) VALUES(?, ?, ?, ?)");
-	$reqins->execute(array($msg, $sender, $admin, date("Y-m-d H:i:s", time())));
+	$certif = 0;
+
+	if(isset($_GET['token']) AND !empty($_GET['token'])) {
+		$token = htmlspecialchars($_GET['token']);
+		$requser = $db->prepare("SELECT id, token FROM user WHERE pseudo = ?");
+        $requser->execute(array($sender));
+        $result = $requser->rowcount();
+        if ($result == 1) { //l'utilisateur existe t-il ?
+            $user = $requser->fetch();
+            if($user[1] == $token) { //le token est-il bon ?
+            	//utilisateur certifié
+            	$certif=$user[0];
+            }
+        }
+	}
+
+	$reqins = $db->prepare("INSERT INTO msg(content, sender, id_certified_user, date_time) VALUES(?, ?, ?, ?)");
+	$reqins->execute(array($msg, $sender, $certif, date("Y-m-d H:i:s", time())));
 	header('Location: msg.php');
 }
 
