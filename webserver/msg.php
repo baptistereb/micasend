@@ -66,10 +66,30 @@ if(isset($_GET['getmsg']) AND !empty($_GET['getmsg'])) {
 				echo " ";
 			}
 		}
+	} elseif ($getmsg == "rank") {
+		for($i=0; $i<count($result); $i++) {
+			$requser = $db->prepare("SELECT rank FROM user WHERE id = ?");
+		    $requser->execute(array($result[$i]["id_certified_user"]));
+		    $r = ($requser->fetch())[0];
+		    if(!empty($r)) {
+		    	echo $r;
+		    } else {
+		    	echo 0;
+		    }
+		    if($i < (count($result)-1)) {
+				echo " ";
+			}
+		}
 	} elseif ($getmsg == "json") {
 		echo "[";
 		for($i=0; $i<count($result); $i++) {
-			echo '{"content":"'.$result[$i]["content"].'", "sender":"'.$result[$i]["sender"].'", "date_time":"'.$result[$i]["date_time"].'", "id_certified_user":"'.$result[$i]["id_certified_user"].'"}';
+			$requser = $db->prepare("SELECT rank FROM user WHERE id = ?");
+		    $requser->execute(array($result[$i]["id_certified_user"]));
+		    $r = ($requser->fetch())[0];
+		    if(empty($r)) {
+		    	$r=0;
+		    }
+			echo '{"content":"'.$result[$i]["content"].'", "sender":"'.$result[$i]["sender"].'", "date_time":"'.$result[$i]["date_time"].'", "id_certified_user":"'.$result[$i]["id_certified_user"].'", "rank":"'.$r.'"}';
 			if($i < (count($result)-1)) {
 				echo ",";
 			}
