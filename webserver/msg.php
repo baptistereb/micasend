@@ -98,7 +98,6 @@ if(isset($_GET['getmsg']) AND !empty($_GET['getmsg'])) {
 				echo " ";
 			}
 		}
-	*/
 	} elseif ($getmsg == "rank") {
 		for($i=0; $i<count($result); $i++) {
 			$requser = $db->prepare("SELECT rank FROM user WHERE id = ?");
@@ -113,7 +112,7 @@ if(isset($_GET['getmsg']) AND !empty($_GET['getmsg'])) {
 				echo " ";
 			}
 		}
-	} elseif ($getmsg == "json") {
+	*/} elseif ($getmsg == "json") {
 		echo "[";
 		for($i=0; $i<count($result); $i++) {
 			$requser = $db->prepare("SELECT rank FROM user WHERE id = ?");
