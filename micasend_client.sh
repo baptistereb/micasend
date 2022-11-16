@@ -1,8 +1,8 @@
 #!/usr/bin/bash
 
 #configuration
-host=""; 
-user="";
+host="127.0.0.1/micasend/webserver"; 
+user="Rubiks";
 token=""; #for verified account
 
 #script pour passer en moderator mode
