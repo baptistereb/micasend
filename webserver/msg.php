@@ -68,7 +68,7 @@ if(isset($_GET['getmsg']) AND !empty($_GET['getmsg'])) {
 				echo "\\n\\n";
 			}
 		}
-	} if($getmsg == "bashmod") {
+	} elseif($getmsg == "bashmod") {
 		for($i=0; $i<count($result); $i++) {
 			//foreach message
 
