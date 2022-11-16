@@ -64,7 +64,7 @@ if(isset($_GET['getmsg']) AND !empty($_GET['getmsg'])) {
 		    echo $result[$i]["date_time"];
 			echo " \\033[33m(".$result[$i]["id"].") \\033[0m";
 		    echo "\\n";
-			echo "\\033[34m ".str_replace("\\ ", "$", $result[$i]["content"])."\\033[0m";
+			echo "\\033[34m ".str_replace("$", "\\ ", $result[$i]["content"])."\\033[0m";
 			if($i < (count($result)-1)) {
 				echo "\\n\\n";
 			}
