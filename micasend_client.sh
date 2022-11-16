@@ -1,9 +1,9 @@
 #!/usr/bin/bash
 
 #configuration
-host="127.0.0.1/micasend/webserver/"; 
-user="Rubiks";
-token="1234"; #for verified account
+host=""; 
+user="";
+token=""; #for verified account
 
 #script pour passer en moderator mode
 if [ "$1" = "-m" ]
