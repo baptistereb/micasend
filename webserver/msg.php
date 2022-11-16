@@ -38,6 +38,38 @@ if(isset($_GET['getmsg']) AND !empty($_GET['getmsg'])) {
 				echo " ";
 			}
 		}
+	} if($getmsg == "bash") {
+		for($i=0; $i<count($result); $i++) {
+			//foreach message
+
+			$requser = $db->prepare("SELECT id, rank FROM user WHERE id = ?");
+		    $requser->execute(array($result[$i]["id_certified_user"]));
+		    $r = $requser->fetch();
+		    if($r[1] > 0) {
+		    	if($r[1] == 15) {
+		    		echo "\\033[37m [\\033[31mAdmin\\033[37m]";
+		    	}
+		    	if($r[1] == 12) {
+		    		echo "\\033[37m [\\033[31mMod\\033[37m]";
+		    	}
+		    	if($r[1] == 11) {
+		    		echo "\\033[37m [\\033[31mBot\\033[37m]";
+		    	}
+		    }
+		    if(!empty($r)) {
+		    	echo "\\033[32m \\033[01m".$result[$i]["sender"]."\\033[33m(".$r[0].") \\033[0m";
+		    } else {
+		    	echo "\\033[31m ".$result[$i]["sender"]." \\033[0m";
+		    }
+		    echo $result[$i]["date_time"];
+			echo " \\033[33m(".$result[$i]["id"].") \\033[0m";
+		    echo "\\n";
+			echo "\\033[34m ".$result[$i]["content"]."\\033[0m";
+			if($i < (count($result)-1)) {
+				echo "\\n\\n";
+			}
+		}
+	/*
 	} elseif ($getmsg == "content") {
 		for($i=0; $i<count($result); $i++) {
 			echo $result[$i]["content"];
@@ -66,6 +98,7 @@ if(isset($_GET['getmsg']) AND !empty($_GET['getmsg'])) {
 				echo " ";
 			}
 		}
+	*/
 	} elseif ($getmsg == "rank") {
 		for($i=0; $i<count($result); $i++) {
 			$requser = $db->prepare("SELECT rank FROM user WHERE id = ?");

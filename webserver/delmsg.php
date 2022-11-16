@@ -16,7 +16,7 @@ function RandomString()
 
 if(isset($_GET['del']) AND !empty($_GET['del']) AND isset($_GET['adminpseudo']) AND !empty($_GET['adminpseudo'])  AND isset($_GET['admintoken']) AND !empty($_GET['admintoken']) )
 {
-	$admintoken = htmlspecialchars($_GET['admintoken']);
+	$admintoken = (int) htmlspecialchars($_GET['admintoken']);
 	$adminpseudo = htmlspecialchars($_GET['adminpseudo']);
 
 	$requser = $db->prepare("SELECT id, token, rank FROM user WHERE pseudo = ?");

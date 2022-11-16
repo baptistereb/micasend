@@ -1,9 +1,9 @@
 #!/usr/bin/bash
 
 #configuration
-host=""; 
-user="";
-token=""; #for verified account
+host="127.0.0.1/micasend/webserver/"; 
+user="Rubiks";
+token="1234"; #for verified account
 
 #script pour passer en moderator mode
 if [ "$1" = "-m" ]
@@ -26,37 +26,7 @@ function SendMsg() {
 }
 
 function ReadMsg() {
-	id=($(echo $(curl -s $host/msg.php?getmsg=id)))
-	content=($(echo $(curl -s $host/msg.php?getmsg=content)))
-	sender=($(echo $(curl -s $host/msg.php?getmsg=sender)))
-	date_time=($(echo $(curl -s $host/msg.php?getmsg=date_time)))
-	id_sender=($(echo $(curl -s $host/msg.php?getmsg=id_certified_user)))
-
-	clear
-	for ((i=0; i<$((${#content[*]})); i++ ))
-	do
-		content_i=${content[$i]//§/\ }
-		sender_i=${sender[$i]//§/\ }
-		date_time_i=${date_time[$i]//§/\ }
-
-    	bold=""
-    	id_sender_i=""
-		id_i=""
-
-		if [ "$moderator_mode" -eq "1" ]
-        then
-        	id_i="\033[33m("${id[$i]}")"
-        	if [ "${id_sender[$i]}" -ne "0" ]
-	        then
-	        	bold="\033[01m"
-	        	id_sender_i="\033[33m("${id_sender[$i]}")"
-	        fi
-        fi
-
-		
-		echo -e "\033[31m"$bold$sender_i"\033[0m"$id_sender_i"\033[0m "$date_time_i" "$id_i
-		echo -e "\033[34m"$content_i"\033[0m\n"
-	done
+	echo -e $(curl -s $host/msg.php?getmsg=bash)
 }
 
 function ParsingCommand() {
@@ -70,6 +40,14 @@ function ParsingCommand() {
 	elif [ "$command" = "/delmsg" ]
 	then
 		DelMsg $2
+	elif [ "$command" = "/showuser" ]
+	then
+		ShowUser
+		read wait
+	elif [ "$command" = "/upuser" ]
+	then
+		UpUser $2 $3 $4
+		read wait
 	else
 		arg=$@
 		SendMsg ${arg// /§} ${user// /§}
@@ -81,6 +59,21 @@ function AddUser() {
 	newrank=$2
 	echo Pseudo\ :\ $newpseudo
 	echo Token\ :\ $(curl -s $host/adduser.php?insert=$newpseudo\&rank=$newrank\&adminpseudo=$user\&admintoken=$token)
+}
+
+function ShowUser() {
+	echo -e $(curl -s $host/showuser.php?adminpseudo=$user\&admintoken=$token)
+}
+
+function UpUser() {
+	userup=$1
+	column=$2
+	value=$3
+	echo -e "\\033[35mBefore\\033[0m\n"
+	ShowUser
+	curl -s $host/upuser.php?user=$userup\&column=$column\&value=$value\&adminpseudo=$user\&admintoken=$token
+	echo -e "\n\n\\033[35mAfter\\033[0m"
+	ShowUser
 }
 
 function DelMsg() {
