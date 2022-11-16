@@ -26,7 +26,12 @@ function SendMsg() {
 }
 
 function ReadMsg() {
-	echo -e $(curl -s $host/msg.php?getmsg=bash)
+	if [ "$moderator_mode" = "1" ]
+	then
+		echo -e $(curl -s $host/msg.php?getmsg=bashmod)
+	else
+		echo -e $(curl -s $host/msg.php?getmsg=bash)		
+	fi
 }
 
 function ParsingCommand() {
