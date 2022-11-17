@@ -1,5 +1,3 @@
-#!/usr/bin/bash
-
 #configuration à remplir si vous n'utilisez pas le client sur l'instance
 if [[ -n "$host" ]]
 then
