@@ -1,17 +1,3 @@
-#!/usr/bin/bash
-
-host=""
-user=""
-token="" #si vous êtes un utilisateur verifé
-
-#script pour passer en moderator mode
-if [ "$1" = "-m" ]
-then
-	moderator_mode=1
-else
-	moderator_mode=0
-fi
-
 function SendMsg() {
 	#on remplace les espaces par des §
 	msg=${1// /§}
