@@ -1,16 +1,8 @@
-#configuration à remplir si vous n'utilisez pas le client sur l'instance
-if [[ -n "$host" ]]
-then
-	host=""; 
-fi
-if [[ -n "$user" ]]
-then
-	user=""; 
-fi
-if [[ -n "$token" ]]
-then
-	token=""; 
-fi
+#!/usr/bin/bash
+
+host=""
+user=""
+token="" #si vous êtes un utilisateur verifé
 
 #script pour passer en moderator mode
 if [ "$1" = "-m" ]
