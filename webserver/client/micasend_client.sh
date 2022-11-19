@@ -88,7 +88,7 @@ function UpUser() {
 
 function AffHelp() {
 	clear
-	echo -e "\\033[35m/showgame\\033[0m mid_player1 id_player2"
+	echo -e "\\033[35m/showgame\\033[0m id_player1 id_player2"
 	echo -e "\\033[33mPermet d'afficher la partie entre player1 et player2\\033[0m\n"
 
 	echo -e "\n\n\\033[31m\\033[01mModerator\\033[0m\n\n"
