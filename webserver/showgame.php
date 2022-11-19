@@ -6,7 +6,7 @@ if(isset($_GET['player1']) AND !empty($_GET['player1'])  AND isset($_GET['player
 	$player1 = htmlspecialchars($_GET['player1']);
 	$player2 = htmlspecialchars($_GET['player2']);
 
-	$req = $db->prepare("SELECT matrix, nextmoove, sequence FROM game WHERE (player1 = ? AND player2 = ?) OR (player2 = ? AND player1 = ?)");
+	$req = $db->prepare("SELECT id, matrix, nextmoove, sequence FROM game WHERE (player1 = ? AND player2 = ?) OR (player2 = ? AND player1 = ?)");
 	$req->execute(array($player1, $player2, $player1, $player2));
 	$result = $req->fetchAll(PDO::FETCH_ASSOC);
 
@@ -26,7 +26,7 @@ if(isset($_GET['player1']) AND !empty($_GET['player1'])  AND isset($_GET['player
     	$nextplayer = $user2[0]["pseudo"];    	
     }
 
-	echo "\\n\\n Partie entre \\033[33m".$user1[0]["pseudo"]."\\033[0m et \\033[33m".$user2[0]["pseudo"]."\\033[0m\\n";
+	echo "\\n\\n Partie entre \\033[33m".$user1[0]["pseudo"]."\\033[0m et \\033[33m".$user2[0]["pseudo"]."\\033[0m\\n \\033[33m(".$result[0]["id"].") \\033[0m";
 	echo " C'est au tour de \\033[33m".$nextplayer."\\033[0m de jouer !\\n\\n\\n";
 
 	for($y=0;$y<14;$y++) {

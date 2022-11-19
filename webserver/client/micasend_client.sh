@@ -26,6 +26,9 @@ function ParsingCommand() {
 	then
 		ShowGame $2 $3
 		read wait
+	elif [ "$command" = "/delgame" ]
+	then
+		DelGame $2
 	elif [ "$command" = "/upuser" ]
 	then
 		UpUser $2 $3 $4
@@ -110,6 +113,11 @@ function AddGame() {
 	player1=$1
 	player2=$2
 	echo $(curl -s $host/addgame.php?player1=$1\&player2=$2\&adminpseudo=$user\&admintoken=$token)
+}
+
+function DelGame() {
+	game=$1
+	curl -s $host/delgame.php?del=$game\&adminpseudo=$user\&admintoken=$token
 }
 
 #affichage
