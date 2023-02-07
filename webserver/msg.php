@@ -26,7 +26,7 @@ if(isset($_GET['message']) AND !empty($_GET['message']) AND isset($_GET['sender'
 	header('Location: msg.php');
 }
 
-$req = $db->query("SELECT * FROM msg LIMIT 20 BY id DESC");
+$req = $db->query("SELECT * FROM msg ORDER BY id DESC LIMIT 20");
 $result = $req->fetchAll(PDO::FETCH_ASSOC);
 
 if(isset($_GET['getmsg']) AND !empty($_GET['getmsg'])) {
