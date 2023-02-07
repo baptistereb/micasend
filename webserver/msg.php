@@ -21,12 +21,12 @@ if(isset($_GET['message']) AND !empty($_GET['message']) AND isset($_GET['sender'
         }
 	}
 
-	$reqins = $db->prepare("INSERT INTO msg(content, sender, id_certified_user, date_time) VALUES(?, ?, ?, ?) LIMIT 20");
+	$reqins = $db->prepare("INSERT INTO msg(content, sender, id_certified_user, date_time) VALUES(?, ?, ?, ?)");
 	$reqins->execute(array($msg, $sender, $certif, date("Y-m-d H:i:s", time())));
 	header('Location: msg.php');
 }
 
-$req = $db->query("SELECT * FROM msg");
+$req = $db->query("SELECT * FROM msg LIMIT 20");
 $result = $req->fetchAll(PDO::FETCH_ASSOC);
 
 if(isset($_GET['getmsg']) AND !empty($_GET['getmsg'])) {
