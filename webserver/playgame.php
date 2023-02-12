@@ -1,10 +1,49 @@
 <?php
 include "index.php";
 
+
+//ptite fonction généré par chatGPT qui prend en entrée une variable $cases = array("x","x"," "...)
+function estPartieTerminee($cases) {
+  // Vérifie les lignes
+  for ($i = 0; $i < 3; $i++) {
+    if ($cases[$i*3] == $cases[$i*3+1] && $cases[$i*3+1] == $cases[$i*3+2] && $cases[$i*3] != " ") {
+      return true;
+    }
+  }
+
+  // Vérifie les colonnes
+  for ($i = 0; $i < 3; $i++) {
+    if ($cases[$i] == $cases[$i+3] && $cases[$i+3] == $cases[$i+6] && $cases[$i] != " ") {
+      return true;
+    }
+  }
+
+  // Vérifie les diagonales
+  if ($cases[0] == $cases[4] && $cases[4] == $cases[8] && $cases[0] != " ") {
+    return true;
+  }
+  if ($cases[2] == $cases[4] && $cases[4] == $cases[6] && $cases[2] != " ") {
+    return true;
+  }
+
+  // Vérifie s'il reste des cases vides
+  for ($i = 0; $i < 9; $i++) {
+    if ($cases[$i] == " ") {
+      return false;
+    }
+  }
+
+  // Si aucune condition précédente n'a été remplie, cela signifie que la partie est nulle
+  return "nul";
+}
+
+
+
 if(isset($_GET['player1']) AND !empty($_GET['player1'])  AND isset($_GET['player2']) AND !empty($_GET['player2']) AND isset($_GET['adminpseudo']) AND !empty($_GET['adminpseudo']) AND isset($_GET['admintoken']) AND !empty($_GET['admintoken']) AND isset($_GET['coup']) AND !empty($_GET['coup']))
 {
 	$player1 = htmlspecialchars($_GET['player1']);
 	$player2 = htmlspecialchars($_GET['player2']);
+	//$id = htmlspecialchars($_GET['id']);	
 	$admintoken = htmlspecialchars($_GET['admintoken']);
 	$adminpseudo = htmlspecialchars($_GET['adminpseudo']);
 	$coup = htmlspecialchars($_GET['coup']);
