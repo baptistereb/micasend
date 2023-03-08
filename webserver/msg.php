@@ -21,8 +21,7 @@ if(isset($_GET['message']) AND !empty($_GET['message']) AND isset($_GET['sender'
         }
 	}
 
-	$msg = str_replace('\\n', "", $msg);
-	$msg = str_replace('\\0', "", $msg);
+	$msg = str_replace('\\', "essaie encore", $msg);
 
 	$reqins = $db->prepare("INSERT INTO msg(content, sender, id_certified_user, date_time) VALUES(?, ?, ?, ?)");
 	$reqins->execute(array($msg, $sender, $certif, date("Y-m-d H:i:s", time())));
