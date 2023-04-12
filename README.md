@@ -15,9 +15,18 @@ user="votre nom d'utilisateur"
 On peut également ajouter le token si on a un compte sur l'instance
 ```bash
 token="token donné par votre administrateur correspondant a votre pseudo si vous êtes un utilisateur vérifié"
+``````
+Vous pouvez désormais rendre le fichier executable
+```bash
+sudo chmod +x micasend.sh
 ```
 
 ## Utilisation
+Pour lancer le script en étant dans le dossier de micasend.sh,
+```bash
+./micasend.sh
+```
+
 En tant que modérateur, lancer le script avec l'argument -m vous permet d'acceder au modérator mode
 Si vous êtes modérateur les commandes :
 ```bash
