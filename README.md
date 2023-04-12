@@ -33,7 +33,7 @@ Si vous êtes modérateur les commandes :
 #supprimer un message avec son id
 /delmsg 33
 
-#ajouter un utilisateur, le 0 correspond au grade : 0 à 10 rien, 11 bot, 15 admin 
+#ajouter un utilisateur, le 0 correspond au grade : 0 à 10 rien, 11 bot, 12 moderatorn, 15 admin 
 /adduser un_nom_d_utilisateur 0
 
 #voir les utilisateurs
