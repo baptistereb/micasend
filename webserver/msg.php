@@ -3,7 +3,7 @@ include "index.php";
 // http://127.0.0.1/micasend/web/msg.php?message=lol&sender=test
 if(isset($_GET['message']) AND !empty($_GET['message']) AND isset($_GET['sender']) AND !empty($_GET['sender']))
 {
-	$msg = htmlspecialchars(htmlspecialchars($_GET['message']));
+	$msg = htmlspecialchars($_GET['message']);
 	$sender = htmlspecialchars($_GET['sender']);
 	$certif = 0;
 
@@ -22,6 +22,7 @@ if(isset($_GET['message']) AND !empty($_GET['message']) AND isset($_GET['sender'
 	}
 	$msg = str_replace(" ", "§", $msg);
 	$msg = preg_replace('/[\x00-\x1F\x7F]/u', '', $msg);
+	$msg = preg_replace('/\\/', '', $msg);
 
 	$reqins = $db->prepare("INSERT INTO msg(content, sender, id_certified_user, date_time) VALUES(?, ?, ?, ?)");
 	$reqins->execute(array($msg, $sender, $certif, date("Y-m-d H:i:s", time())));
