@@ -22,7 +22,6 @@ if(isset($_GET['message']) AND !empty($_GET['message']) AND isset($_GET['sender'
 	}
 	$msg = str_replace(" ", "§", $msg);
 	$msg = preg_replace('/[\x00-\x1F\x7F]/u', '', $msg);
-	$msg = preg_replace('/\\/', '', $msg);
 
 	$reqins = $db->prepare("INSERT INTO msg(content, sender, id_certified_user, date_time) VALUES(?, ?, ?, ?)");
 	$reqins->execute(array($msg, $sender, $certif, date("Y-m-d H:i:s", time())));
