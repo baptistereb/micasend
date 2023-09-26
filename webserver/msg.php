@@ -3,7 +3,7 @@ include "index.php";
 // http://127.0.0.1/micasend/web/msg.php?message=lol&sender=test
 if(isset($_GET['message']) AND !empty($_GET['message']) AND isset($_GET['sender']) AND !empty($_GET['sender']))
 {
-	$msg = htmlspecialchars($_GET['message']);
+	$msg = htmlspecialchars((string) $_GET['message']);
 	$sender = htmlspecialchars($_GET['sender']);
 	$certif = 0;
 
@@ -67,7 +67,7 @@ if(isset($_GET['getmsg']) AND !empty($_GET['getmsg'])) {
 		    }
 		    echo $result[$i]["date_time"];
 		    echo "\\n";
-			echo "\\033[34m ".htmlspecialchars_decode(str_replace("§", " ", $result[$i]["content"]))."\\033[0m";
+			echo "\\033[34m ".htmlspecialchars_decode(str_replace(array("\\", "/"), "", str_replace("§", " ", $result[$i]["content"])))."\\033[0m";
 			if($i < (count($result)-1)) {
 				echo "\\n\\n";
 			}
@@ -98,7 +98,7 @@ if(isset($_GET['getmsg']) AND !empty($_GET['getmsg'])) {
 		    echo $result[$i]["date_time"];
 			echo " \\033[33m(".$result[$i]["id"].") \\033[0m";
 		    echo "\\n";
-			echo "\\033[34m ".htmlspecialchars_decode(str_replace("§", " ", $result[$i]["content"]))."\\033[0m";
+			echo "\\033[34m ".htmlspecialchars_decode(str_replace(array("\\", "/"), "", str_replace("§", " ", $result[$i]["content"])))."\\033[0m";
 			if($i < (count($result)-1)) {
 				echo "\\n\\n";
 			}
