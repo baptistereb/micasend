@@ -56,6 +56,7 @@ function SendMsg() {
 }
 
 function ReadMsg() {
+	clear
 	if [ "$moderator_mode" = "1" ]
 	then
 		echo -e $(curl -s $host/msg.php?getmsg=bashmod)
