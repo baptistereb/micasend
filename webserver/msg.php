@@ -154,7 +154,7 @@ if(isset($_GET['getmsg']) AND !empty($_GET['getmsg'])) {
 		    if(empty($r)) {
 		    	$r=0;
 		    }
-			echo '{"id":"'.$result[$i]["id"].'", content":"'.str_replace('&quot;', '\"',$result[$i]["content"]).'", "sender":"'.str_replace('&quot;', '\"',$result[$i]["sender"]).'", "date_time":"'.$result[$i]["date_time"].'", "id_certified_user":"'.$result[$i]["id_certified_user"].'", "rank":"'.$r.'"}';
+			echo '{"id":"'.$result[$i]["id"].'", "content":"'.str_replace('&quot;', '\"',$result[$i]["content"]).'", "sender":"'.str_replace('&quot;', '\"',$result[$i]["sender"]).'", "date_time":"'.$result[$i]["date_time"].'", "id_certified_user":"'.$result[$i]["id_certified_user"].'", "rank":"'.$r.'"}';
 			if($i < (count($result)-1)) {
 				echo ",";
 			}
